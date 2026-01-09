@@ -33,7 +33,7 @@ public class listagemVIEW extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tabelaVendidos = new javax.swing.JTable();
+        listaProdutos = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -58,7 +58,7 @@ public class listagemVIEW extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        tabelaVendidos.setModel(new javax.swing.table.DefaultTableModel(
+        listaProdutos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -69,7 +69,7 @@ public class listagemVIEW extends javax.swing.JFrame {
                 "ID", "Nome", "Valor", "Status"
             }
         ));
-        jScrollPane1.setViewportView(tabelaVendidos);
+        jScrollPane1.setViewportView(listaProdutos);
 
         jLabel1.setFont(new java.awt.Font("Lucida Fax", 0, 18)); // NOI18N
         jLabel1.setText("Lista de Produtos");
@@ -176,8 +176,8 @@ public class listagemVIEW extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVenderActionPerformed
 
     private void btnVendasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVendasActionPerformed
-        //vendasVIEW vendas = new vendasVIEW(); 
-        //vendas.setVisible(true);
+        vendasVIEW vendas = new vendasVIEW(); 
+        vendas.setVisible(true);
     }//GEN-LAST:event_btnVendasActionPerformed
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
@@ -231,14 +231,14 @@ public class listagemVIEW extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTable tabelaVendidos;
+    private javax.swing.JTable listaProdutos;
     // End of variables declaration//GEN-END:variables
 
     private void listarProdutos(){
         try {
             ProdutosDAO produtosdao = new ProdutosDAO();
             
-            DefaultTableModel model = (DefaultTableModel) tabelaVendidos.getModel();
+            DefaultTableModel model = (DefaultTableModel) listaProdutos.getModel();
             model.setNumRows(0);
             
             ArrayList<ProdutosDTO> listagem = produtosdao.listarProdutos();

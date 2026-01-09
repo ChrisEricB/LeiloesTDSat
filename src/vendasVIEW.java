@@ -7,6 +7,10 @@
  *
  * @author chris
  */
+
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
+
 public class vendasVIEW extends javax.swing.JFrame {
 
     /**
@@ -61,9 +65,9 @@ public class vendasVIEW extends javax.swing.JFrame {
         btnVendas2 = new javax.swing.JButton();
         btnVoltar2 = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
-        jScrollPane7 = new javax.swing.JScrollPane();
-        listaProdutos3 = new javax.swing.JTable();
         jLabel8 = new javax.swing.JLabel();
+        jScrollPane7 = new javax.swing.JScrollPane();
+        tabelaVendidos = new javax.swing.JTable();
         jSeparator4 = new javax.swing.JSeparator();
 
         jFrame1.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -345,7 +349,11 @@ public class vendasVIEW extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(550, 470));
 
-        listaProdutos3.setModel(new javax.swing.table.DefaultTableModel(
+        jLabel8.setFont(new java.awt.Font("Lucida Fax", 0, 18)); // NOI18N
+        jLabel8.setText("Lista de Produtos Vendidos");
+        jLabel8.setAlignmentY(0.0F);
+
+        tabelaVendidos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -356,37 +364,40 @@ public class vendasVIEW extends javax.swing.JFrame {
                 "ID", "Nome", "Valor", "Status"
             }
         ));
-        jScrollPane7.setViewportView(listaProdutos3);
-
-        jLabel8.setFont(new java.awt.Font("Lucida Fax", 0, 18)); // NOI18N
-        jLabel8.setText("Lista de Produtos Vendidos");
-        jLabel8.setAlignmentY(0.0F);
+        jScrollPane7.setViewportView(tabelaVendidos);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(47, 47, 47)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 440, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(149, 149, 149)
+                        .addComponent(jLabel8))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(47, 47, 47)
+                        .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(51, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel8)
-                .addGap(141, 141, 141))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(26, 26, 26)
+                .addGap(37, 37, 37)
                 .addComponent(jLabel8)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(93, 93, 93)
-                .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(105, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 337, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(56, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
 
         pack();
@@ -409,7 +420,7 @@ public class vendasVIEW extends javax.swing.JFrame {
             javax.swing.JOptionPane.showMessageDialog(null, "Produto vendido com sucesso!");
             id_produto_venda.setText("");
 
-            listarProdutos(); // atualiza a tabela
+            listarVendidos(); // atualiza a tabela
         } catch (NumberFormatException e) {
             javax.swing.JOptionPane.showMessageDialog(null, "ID inválido. Digite apenas números.");
         } catch (Exception e) {
@@ -443,7 +454,7 @@ public class vendasVIEW extends javax.swing.JFrame {
             javax.swing.JOptionPane.showMessageDialog(null, "Produto vendido com sucesso!");
             id_produto_venda.setText("");
 
-            listarProdutos(); // atualiza a tabela
+            listarVendidos(); // atualiza a tabela
         } catch (NumberFormatException e) {
             javax.swing.JOptionPane.showMessageDialog(null, "ID inválido. Digite apenas números.");
         } catch (Exception e) {
@@ -477,7 +488,7 @@ public class vendasVIEW extends javax.swing.JFrame {
             javax.swing.JOptionPane.showMessageDialog(null, "Produto vendido com sucesso!");
             id_produto_venda.setText("");
 
-            listarProdutos(); // atualiza a tabela
+            listarVendidos(); // atualiza a tabela
         } catch (NumberFormatException e) {
             javax.swing.JOptionPane.showMessageDialog(null, "ID inválido. Digite apenas números.");
         } catch (Exception e) {
@@ -589,6 +600,6 @@ public class vendasVIEW extends javax.swing.JFrame {
     private javax.swing.JTable listaProdutos;
     private javax.swing.JTable listaProdutos1;
     private javax.swing.JTable listaProdutos2;
-    private javax.swing.JTable listaProdutos3;
+    private javax.swing.JTable tabelaVendidos;
     // End of variables declaration//GEN-END:variables
 }
