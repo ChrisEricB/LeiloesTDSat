@@ -7,6 +7,9 @@
  *
  * @author Adm
  */
+
+import javax.swing.JOptionPane;
+
 public class cadastroVIEW extends javax.swing.JFrame {
 
     /**
@@ -140,16 +143,43 @@ public class cadastroVIEW extends javax.swing.JFrame {
     }//GEN-LAST:event_cadastroNomeActionPerformed
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
+     try {
+        // 1) Ler campos
+        String nome = cadastroNome.getText().trim();
+        String valorTexto = cadastroValor.getText().trim();
+
+        // 2) Validações simples (evita cadastrar vazio)
+        if (nome.isEmpty() || valorTexto.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Preencha Nome e Valor.");
+            return;
+        }
+
+        // 3) Converter valor (pode dar erro se não for número)
+        int valor = Integer.parseInt(valorTexto);
+
+        // 4) Montar o DTO
         ProdutosDTO produto = new ProdutosDTO();
-        String nome = cadastroNome.getText();
-        String valor = cadastroValor.getText();
-        String status = "A Venda";
         produto.setNome(nome);
-        produto.setValor(Integer.parseInt(valor));
-        produto.setStatus(status);
-        
+        produto.setValor(valor);
+        produto.setStatus("A Venda");
+
+        // 5) Chamar DAO
         ProdutosDAO produtodao = new ProdutosDAO();
         produtodao.cadastrarProduto(produto);
+
+        // 6) Mensagem de sucesso
+        JOptionPane.showMessageDialog(null, "Cadastro realizado com sucesso!");
+
+        // 7) Limpar campos (opcional, mas ajuda)
+        cadastroNome.setText("");
+        cadastroValor.setText("");
+        cadastroNome.requestFocus();
+
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(null, "Valor inválido. Digite apenas números.");
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(null, "Erro ao cadastrar: " + e.getMessage());
+    }
         
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
